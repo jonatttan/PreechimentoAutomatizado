@@ -1,0 +1,5 @@
+Referencias/
+scripts/cadastrados.json
+scripts/__pycache__
+scripts/Gerador_json
+scripts/geckodriver.log

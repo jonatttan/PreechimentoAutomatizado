@@ -3,7 +3,14 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 import json
+from geradorCpf import gera_cpf
 
+decide = input("Deseja gerar CPF? (s/n): ")
+
+if decide == "s":
+    gera_cpf("dados.json")
+    print("CPFs gerados, vamos começar os cadastros em breve...")
+    sleep(5)
 
 with open('dados.json', 'r') as json_file:
     dados = json.load(json_file)
@@ -73,5 +80,11 @@ for dado in dados:
 
     ele=driver.find_element_by_xpath('//*[@id="cadastrarcliente"]')
     #ele.click()
+
+    linha = { 'mail': dado["mail"], "pwd": dado["pwd"] }
+    with open("cadastrados.json", 'a') as cad:
+        json.dump(linha, cad, indent=4)
+    
+    print("Incluído os dados abaixo no arquivo cadastrados.json:\nEmail: ", dado["mail"], "\nSenha: ", dado["pwd"])
 
     #sleep(2)
